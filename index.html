@@ -62,24 +62,6 @@
             transform: scale(1.1);
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .nav-links a:hover {
-            color: #333;
-        }
-
         .sign-in-btn {
             background: #333;
             color: white;
@@ -148,6 +130,75 @@
             51%, 100% {
                 opacity: 0;
             }
+        }
+
+        .page-nav {
+            position: fixed;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem 0 1rem 0;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            width: 260px;
+            transition: all 0.4s ease;
+            display: block;
+            opacity: 1;
+        }
+
+        .page-nav.hidden {
+            opacity: 0;
+            transform: translateY(-50%) translateX(-100%);
+            pointer-events: none;
+        }
+
+        .page-nav:hover {
+            opacity: 1 !important;
+            transform: translateY(-50%) translateX(0) !important;
+            pointer-events: all !important;
+        }
+
+        .page-nav:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .page-nav-header {
+            padding: 0 1.5rem 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 0.5rem;
+        }
+
+        .page-nav-item {
+            display: block;
+            padding: 0.7rem 1.5rem;
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+
+        .page-nav-item:hover {
+            color: #333;
+            background: rgba(102, 126, 234, 0.05);
+            border-left-color: #667eea;
+        }
+
+        .page-nav-item.active {
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+            border-left-color: #667eea;
+            font-weight: 500;
         }
 
         .hero .subtitle {
@@ -605,14 +656,6 @@
                 font-size: 2.5rem;
             }
             
-            .hero .subtitle {
-                font-size: 1.1rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
@@ -653,6 +696,27 @@
             .robots-grid {
                 grid-template-columns: 1fr;
             }
+
+            .page-nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .page-nav {
+                width: 220px;
+                left: 1rem;
+            }
+            
+            .page-nav-item {
+                font-size: 0.85rem;
+                padding: 0.6rem 1.2rem;
+            }
+            
+            .page-nav-header {
+                font-size: 0.95rem;
+                padding: 0 1.2rem 0.8rem 1.2rem;
+            }
         }
 
         .prompt-input {
@@ -685,19 +749,26 @@
     <header>
         <nav class="container">
             <a href="#" class="logo">
-                <img src="./assets/logo-icon.png" alt="LuckyRobots" class="logo-icon" />
+                <img src="https://github.com/ZoreAnuj/LuckyWorldRelease.github.io/blob/main/assests/431516596-ae6ad53a-741e-4e7a-94cb-5a46a8e81398.png?raw=true" alt="LuckyRobots" class="logo-icon" />
             </a>
-            <ul class="nav-links">
-                <li><a href="#robots">Robots</a></li>
-                <li><a href="#tutorial">Tutorial</a></li>
-                <li><a href="#code">Getting Started</a></li>
-                <li><a href="https://luckyrobots.com/" target="_blank">LuckyRobots</a></li>
-            </ul>
-            <a href="https://luckyrobots.com/" class="sign-in-btn">Sign In</a>
+            <a href="https://luckyrobots.com/" class="sign-in-btn">Visit LuckyRobots</a>
         </nav>
     </header>
 
-    <section class="hero">
+    <!-- Page Navigation -->
+    <nav class="page-nav">
+        <div class="page-nav-header">In this release</div>
+        <a href="#hero" class="page-nav-item active">Introducing LuckyWorld</a>
+        <a href="#robots" class="page-nav-item">Featured robot models</a>
+        <a href="#so100" class="page-nav-item">SO100 navigation robot</a>
+        <a href="#experimental" class="page-nav-item">Experimental platforms</a>
+        <a href="#tutorial" class="page-nav-item">Tutorial overview</a>
+        <a href="#installation" class="page-nav-item">Installation & setup</a>
+        <a href="#recording" class="page-nav-item">Recording episodes</a>
+        <a href="#code" class="page-nav-item">Getting started</a>
+    </nav>
+
+    <section class="hero" id="hero">
         <div class="container">
             <div class="version-badge">Release v0.1</div>
             <h1>Introducing <span class="typewriter-container"><span class="typed-text" id="typed-text"></span><span class="cursor" id="cursor"></span></span></h1>
@@ -730,14 +801,14 @@
             </div>
             
             <!-- SO100 - Full Width -->
-            <div class="robot-card-full">
+            <div class="robot-card-full" id="so100">
                 <div class="robot-placeholder">SO100 (GIF will come here)</div>
                 <h3>SO100</h3>
                 <p>Compact wheeled robot for indoor navigation and mapping tasks.</p>
             </div>
 
             <!-- Experimental Robots Grid -->
-            <div class="robots-grid">
+            <div class="robots-grid" id="experimental">
                 <div class="robot-card">
                     <div class="experimental-badge">Experimental</div>
                     <div class="robot-placeholder">Stretch (GIF will come here)</div>
@@ -774,14 +845,14 @@
             </div>
 
             <div class="tutorial-content">
-                <div class="tutorial-item">
+                <div class="tutorial-item" id="installation">
                     <h4>Installation & Setting up</h4>
                     <div class="tutorial-content-grid">
                         <div class="tutorial-placeholder">Video</div>
                         <div class="tutorial-placeholder">Code Flow/Steps</div>
                     </div>
                 </div>
-                <div class="tutorial-item">
+                <div class="tutorial-item" id="recording">
                     <h4>Recording Episodes</h4>
                     <div class="tutorial-content-grid">
                         <div class="tutorial-placeholder">Video</div>
@@ -876,19 +947,95 @@ robot.execute_policy(policy, task=<span class="highlight">"find and bring me my 
             if (charIndex < textToType.length) {
                 typedTextElement.textContent += textToType.charAt(charIndex);
                 charIndex++;
-                setTimeout(typeCharacter, 120); // Slightly slower for more elegance
+                setTimeout(typeCharacter, 120);
             } else {
-                // Remove cursor after typing is complete
                 setTimeout(() => {
                     cursorElement.style.display = 'none';
                 }, 2000);
             }
         }
 
-        // Start typing when page loads
         window.addEventListener('load', () => {
-            setTimeout(typeCharacter, 800); // Delay before starting
+            setTimeout(typeCharacter, 800);
         });
+
+        // Auto-hide sidebar functionality
+        const pageNav = document.querySelector('.page-nav');
+        let hideTimeout;
+        let isScrolling = false;
+
+        function showSidebar() {
+            pageNav.classList.remove('hidden');
+        }
+
+        function hideSidebar() {
+            pageNav.classList.add('hidden');
+        }
+
+        function resetHideTimer() {
+            clearTimeout(hideTimeout);
+            showSidebar();
+            
+            hideTimeout = setTimeout(() => {
+                if (!pageNav.matches(':hover')) {
+                    hideSidebar();
+                }
+            }, 2000);
+        }
+
+        // Show sidebar on scroll and reset timer
+        window.addEventListener('scroll', () => {
+            isScrolling = true;
+            resetHideTimer();
+            
+            clearTimeout(isScrolling);
+            isScrolling = setTimeout(() => {
+                isScrolling = false;
+            }, 100);
+        });
+
+        // Show sidebar on mouse movement near left edge
+        window.addEventListener('mousemove', (e) => {
+            if (e.clientX < 50) {
+                resetHideTimer();
+            }
+        });
+
+        // Keep sidebar visible on hover
+        pageNav.addEventListener('mouseenter', () => {
+            clearTimeout(hideTimeout);
+            showSidebar();
+        });
+
+        pageNav.addEventListener('mouseleave', () => {
+            resetHideTimer();
+        });
+
+        // Initial hide timer
+        resetHideTimer();
+
+        // Page navigation functionality
+        const navItems = document.querySelectorAll('.page-nav-item');
+        const sections = document.querySelectorAll('section[id]');
+
+        // Update active navigation item based on scroll position
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.offsetHeight;
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === '#' + current) {
+                    item.classList.add('active');
+                }
+            });
+        }
 
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -903,6 +1050,9 @@ robot.execute_policy(policy, task=<span class="highlight">"find and bring me my 
                 }
             });
         });
+
+        // Listen for scroll events to update navigation
+        window.addEventListener('scroll', updateActiveNav);
 
         // Intersection Observer for animations
         const observerOptions = {
@@ -933,14 +1083,12 @@ robot.execute_policy(policy, task=<span class="highlight">"find and bring me my 
                 document.querySelectorAll('.tutorial-step').forEach(s => s.classList.remove('active'));
                 this.classList.add('active');
                 
-                // Add subtle animation effect
                 this.style.transform = 'translateY(-4px) scale(1.02)';
                 setTimeout(() => {
                     this.style.transform = 'translateY(-4px)';
                 }, 200);
             });
 
-            // Add number indicators
             const stepNumber = document.createElement('div');
             stepNumber.style.cssText = `
                 position: absolute;
@@ -975,7 +1123,6 @@ robot.execute_policy(policy, task=<span class="highlight">"find and bring me my 
 
         promptInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                // Simulate processing
                 this.style.background = '#f0f2f5';
                 setTimeout(() => {
                     this.style.background = 'white';
