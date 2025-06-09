@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuckyWorld v0.1 - Democratizing Robotics for Software Engineers</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #e8eaed;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            height: 28px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .logo-icon {
+            transform: scale(1.1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #666;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #333;
+        }
+
+        .sign-in-btn {
+            background: #333;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .sign-in-btn:hover {
+            background: #000;
+        }
+
+        .hero {
+            background: #e8eaed;
+            padding: 8rem 0 4rem;
+            text-align: center;
+        }
+
+        .version-badge {
+            display: inline-block;
+            background: #d1d3d6;
+            color: #666;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #555;
+            font-weight: 500;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .video-section {
+            margin: 3rem 0;
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #d1d3d6;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-placeholder {
+            color: #666;
+            font-size: 1.1rem;
+            text-align: center;
+            background: #f0f2f5;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #d1d3d6;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .cta-button.primary {
+            background: #333;
+            color: white;
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: #333;
+            border: 2px solid #d1d3d6;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .cta-button.primary:hover {
+            background: #000;
+        }
+
+        .cta-button.secondary:hover {
+            border-color: #333;
+        }
+
+        .robots-section {
+            background: white;
+            padding: 5rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .robot-card-full {
+            background: white;
+            border: 1px solid #d1d3d6;
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .robot-card-full:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            border-color: #333;
+        }
+
+        .robots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .robot-card {
+            background: white;
+            border: 1px solid #d1d3d6;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+
+        .robot-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+            border-color: #333;
+        }
+
+        .experimental-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .robot-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #f0f2f5;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+            border: 2px dashed #d1d3d6;
+            font-size: 0.95rem;
+        }
+
+        .robot-card h3, .robot-card-full h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .robot-card p, .robot-card-full p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .tutorial-section {
+            background: #e8eaed;
+            padding: 5rem 0;
+        }
+
+        .tutorial-nav {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            border: 1px solid #d1d3d6;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tutorial-nav::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #333, #666, #333);
+        }
+
+        .tutorial-nav h3 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .tutorial-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tutorial-step {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem 1.2rem;
+            border-radius: 12px;
+            color: #555;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-align: center;
+            position: relative;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .tutorial-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #333, #555);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .tutorial-step:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            color: #333;
+            border-color: #333;
+        }
+
+        .tutorial-step:hover::before {
+            opacity: 0.05;
+        }
+
+        .tutorial-step.active {
+            background: linear-gradient(135deg, #333, #555);
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .tutorial-step.active::before {
+            opacity: 0;
+        }
+
+        .tutorial-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .tutorial-item {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            border: 2px solid #d1d3d6;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+        }
+
+        .tutorial-item:hover {
+            border-color: #333;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .tutorial-item h4 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f2f5;
+        }
+
+        .tutorial-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .tutorial-placeholder {
+            background: #f0f2f5;
+            height: 250px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-style: italic;
+            border: 2px dashed #d1d3d6;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .code-section {
+            background: white;
+            padding: 5rem 0;
+        }
+
+        .code-block {
+            background: #f0f2f5;
+            border: 1px solid #d1d3d6;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'Python';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #333;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .code-block pre {
+            color: #333;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            color: #0066cc;
+            font-weight: 600;
+        }
+
+        .comment {
+            color: #666;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #555;
+            padding-top: 2rem;
+            text-align: center;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        .investor-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 3rem 0;
+            opacity: 0.6;
+            flex-wrap: wrap;
+        }
+
+        .investor-logos span {
+            font-size: 0.9rem;
+            color: #999;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tutorial-steps {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .tutorial-content-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .tutorial-item {
+                padding: 2rem;
+            }
+
+            .tutorial-item h4 {
+                font-size: 1.5rem;
+            }
+
+            .tutorial-nav {
+                padding: 2rem;
+                margin-bottom: 3rem;
+            }
+
+            .tutorial-nav h3 {
+                font-size: 1.5rem;
+            }
+
+            .video-section {
+                margin: 2rem 0;
+                padding: 2rem;
+            }
+
+            .robots-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .prompt-input {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .prompt-input input {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.9rem;
+            border: 2px solid #d1d3d6;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .prompt-input input:focus {
+            outline: none;
+            border-color: #333;
+        }
+
+        .prompt-input input::placeholder {
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">
+                <img src="./assets/logo-icon.png" alt="LuckyRobots" class="logo-icon" />
+            </a>
+            <ul class="nav-links">
+                <li><a href="#robots">Robots</a></li>
+                <li><a href="#tutorial">Tutorial</a></li>
+                <li><a href="#code">Getting Started</a></li>
+                <li><a href="https://luckyrobots.com/" target="_blank">LuckyRobots</a></li>
+            </ul>
+            <a href="https://luckyrobots.com/" class="sign-in-btn">Sign In</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="version-badge">Release v0.1</div>
+            <h1>Let's solve RobotGPT together</h1>
+            <p class="subtitle">
+                We're on a mission to make robotics available to the regular software engineers, 
+                by decoupling it from ROS and physical hardware. Make it usable with natural language, 
+                where you can ask it to perform tasks like you speak.
+            </p>
+
+            <div class="video-section">
+                <div class="video-container">
+                    <video controls poster="" preload="metadata">
+                        <source src="https://github.com/user-attachments/assets/ae6ad53a-741e-4e7a-94cb-5a46a8e81398" type="video/mp4">
+                        <div class="video-placeholder">Demo Video</div>
+                    </video>
+                </div>
+                
+                <div class="prompt-input">
+                    <input type="text" placeholder="Locate My Keyboard" />
+                </div>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#tutorial" class="cta-button primary">Start Training Now</a>
+                <a href="https://luckyrobots.com/" class="cta-button secondary">Join LuckyHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="robots" class="robots-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>A Simulation Platform Built for Real-World AI Models</h2>
+                <p>Today, developers and enterprises are using our platform to build and explore robotic models capable of understanding natural language and performing practical tasks.</p>
+            </div>
+            
+            <!-- SO100 - Full Width -->
+            <div class="robot-card-full">
+                <div class="robot-placeholder">SO100 (GIF will come here)</div>
+                <h3>SO100</h3>
+                <p>A compact wheeled robot designed for indoor navigation tasks. Perfect for autonomous mapping, warehouse operations, and research applications requiring precise mobility control.</p>
+            </div>
+
+            <!-- Experimental Robots Grid -->
+            <div class="robots-grid">
+                <div class="robot-card">
+                    <div class="experimental-badge">Experimental</div>
+                    <div class="robot-placeholder">Stretch (GIF will come here)</div>
+                    <h3>Stretch</h3>
+                    <p>A mobile manipulator built for interactive environments. Combines advanced mobility with manipulation capabilities for service robotics and human-robot interaction scenarios.</p>
+                </div>
+                <div class="robot-card">
+                    <div class="experimental-badge">Experimental</div>
+                    <div class="robot-placeholder">DJI (GIF will come here)</div>
+                    <h3>DJI300</h3>
+                    <p>An aerial robot platform for advanced navigation and perception tasks. Equipped with sophisticated sensors for autonomous flight and complex environmental mapping.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tutorial" class="tutorial-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ready to get started?</h2>
+                <p>Part of the reason we began this journey is that everything we tried was either proprietary hardware, limited to Linux, difficult to install, or impossible to use.</p>
+            </div>
+
+            <div class="tutorial-nav">
+                <h3>Tutorial Overview</h3>
+                <div class="tutorial-steps">
+                    <div class="tutorial-step">Intro</div>
+                    <div class="tutorial-step">Installation & Setup</div>
+                    <div class="tutorial-step">Recording Episodes</div>
+                    <div class="tutorial-step">Upload & HuggingFace</div>
+                    <div class="tutorial-step">Training Policy</div>
+                    <div class="tutorial-step">Inference</div>
+                </div>
+            </div>
+
+            <div class="tutorial-content">
+                <div class="tutorial-item">
+                    <h4>Installation & Setting up</h4>
+                    <div class="tutorial-content-grid">
+                        <div class="tutorial-placeholder">Video</div>
+                        <div class="tutorial-placeholder">Code Flow/Steps</div>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <h4>Recording Episodes</h4>
+                    <div class="tutorial-content-grid">
+                        <div class="tutorial-placeholder">Video</div>
+                        <div class="tutorial-placeholder">Code Flow/Steps</div>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <h4>Uploading and Setting HuggingFace Tag</h4>
+                    <div class="tutorial-content-grid">
+                        <div class="tutorial-placeholder">Video</div>
+                        <div class="tutorial-placeholder">Code Flow/Steps</div>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <h4>Training Your Own Policy</h4>
+                    <div class="tutorial-content-grid">
+                        <div class="tutorial-placeholder">Video</div>
+                        <div class="tutorial-placeholder">Code Flow/Steps</div>
+                    </div>
+                </div>
+                <div class="tutorial-item">
+                    <h4>Inference with Trained Policy</h4>
+                    <div class="tutorial-content-grid">
+                        <div class="tutorial-placeholder">Video</div>
+                        <div class="tutorial-placeholder">Code Flow/Steps</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="code" class="code-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Start Using Lucky Robots</h2>
+                <p>Get immediate access to the platform. Install Lucky Robots in minutes, and start building, training, and experimenting with robotic AI models today.</p>
+            </div>
+
+            <div class="code-block">
+<pre><code><span class="comment"># Install LuckyWorld</span>
+pip install luckyworld
+
+<span class="comment"># Import and initialize your robot</span>
+<span class="highlight">from</span> luckyworld <span class="highlight">import</span> Robot, Environment
+
+<span class="comment"># Create environment and robot</span>
+env = Environment(<span class="highlight">"home_scene"</span>)
+robot = Robot(<span class="highlight">"SO100"</span>, environment=env)
+
+<span class="comment"># Use natural language commands</span>
+robot.execute_command(<span class="highlight">"locate my keyboard"</span>)
+robot.execute_command(<span class="highlight">"navigate to the kitchen"</span>)
+
+<span class="comment"># Record training episodes</span>
+episodes = robot.record_episodes(num_episodes=<span class="highlight">50</span>)
+
+<span class="comment"># Train your policy</span>
+policy = robot.train_policy(episodes)
+
+<span class="comment"># Run inference with trained model</span>
+robot.execute_policy(policy, task=<span class="highlight">"find and bring me my coffee mug"</span>)
+</code></pre>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <div class="cta-buttons">
+                    <a href="https://luckyrobots.com/" class="cta-button primary">View Documentation</a>
+                    <a href="https://huggingface.co/luckyrobots" class="cta-button secondary" target="_blank">Explore & Share Models</a>
+                </div>
+            </div>
+
+            <div class="investor-logos">
+                <span>ANTLER</span>
+                <span>Ascend</span>
+                <span>boostVC</span>
+                <span>DRAPER ASSOCIATES</span>
+                <span>TOMAHAWK.VC</span>
+            </div>
+        </div>
+    </section>
+
+
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initially hide elements and observe them
+        document.querySelectorAll('.robot-card, .robot-card-full, .tutorial-item').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(card);
+        });
+
+        // Tutorial step interaction
+        document.querySelectorAll('.tutorial-step').forEach((step, index) => {
+            step.addEventListener('click', function() {
+                document.querySelectorAll('.tutorial-step').forEach(s => s.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Add subtle animation effect
+                this.style.transform = 'translateY(-4px) scale(1.02)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-4px)';
+                }, 200);
+            });
+
+            // Add number indicators
+            const stepNumber = document.createElement('div');
+            stepNumber.style.cssText = `
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                width: 24px;
+                height: 24px;
+                background: linear-gradient(45deg, #333, #555);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 0.75rem;
+                font-weight: 700;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            `;
+            stepNumber.textContent = index + 1;
+            step.style.position = 'relative';
+            step.appendChild(stepNumber);
+        });
+
+        // Input interaction
+        const promptInput = document.querySelector('.prompt-input input');
+        promptInput.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
+
+        promptInput.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+
+        promptInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                // Simulate processing
+                this.style.background = '#f0f2f5';
+                setTimeout(() => {
+                    this.style.background = 'white';
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
