@@ -817,22 +817,6 @@
             font-size: 0.9rem;
         }
 
-        .investor-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin: 3rem 0;
-            opacity: 0.6;
-            flex-wrap: wrap;
-        }
-
-        .investor-logos span {
-            font-size: 0.9rem;
-            color: #999;
-            font-weight: 500;
-        }
-
         .prompt-input {
             margin: 2rem 0;
             text-align: center;
@@ -987,7 +971,6 @@
         <a href="#upload" class="page-nav-item">Upload & HuggingFace</a>
         <a href="#training" class="page-nav-item">Training policy</a>
         <a href="#inference" class="page-nav-item">Inference</a>
-        <a href="#code" class="page-nav-item">Getting started</a>
     </nav>
 
     <section class="hero" id="hero">
@@ -1133,7 +1116,7 @@ python lerobot\examples\0_setup_dataset_tag.py
                             </iframe>
                         </div>
                         <div class="tutorial-code-block">
-<pre><code><span class="comment"># Train your policy </span>
+<pre><code><span class="comment"># Train your policy with diffusion model</span>
 <span class="comment"># This command will start training using the SO100 dataset</span>
 
 python lerobot/scripts/train.py \
@@ -1144,10 +1127,12 @@ python lerobot/scripts/train.py \
 
 <span class="comment"># Parameters explained:</span>
 <span class="comment"># --dataset.repo_id: HuggingFace dataset repository</span>
-<span class="comment"># --policy.type: Policy Type(for e.g. diffusion, act, pi0)</span>
+<span class="comment"># --policy.type: Neural network architecture (diffusion)</span>
 <span class="comment"># --dataset.video_backend: Video processing backend</span>
 <span class="comment"># 2>&1 | tee: Save training logs to training_log.txt</span>
-    
+
+<span class="comment"># Training will save checkpoints automatically</span>
+<span class="comment"># Monitor progress in training_log.txt</span>
 </code></pre>
                         </div>
                     </div>
@@ -1163,55 +1148,30 @@ python lerobot/scripts/train.py \
         </div>
     </section>
 
-    <section id="code" class="code-section">
+    <footer>
         <div class="container">
-            <div class="section-header">
-                <h2>Start Using Lucky Robots</h2>
-                <p>Get immediate access to the platform. Install Lucky Robots in minutes, and start building, training, and experimenting with robotic AI models today.</p>
-            </div>
-
-            <div class="code-block">
-<pre><code><span class="comment"># Install LuckyWorld</span>
-pip install luckyworld
-
-<span class="comment"># Import and initialize your robot</span>
-<span class="highlight">from</span> luckyworld <span class="highlight">import</span> Robot, Environment
-
-<span class="comment"># Create environment and robot</span>
-env = Environment(<span class="highlight">"home_scene"</span>)
-robot = Robot(<span class="highlight">"SO100"</span>, environment=env)
-
-<span class="comment"># Use natural language commands</span>
-robot.execute_command(<span class="highlight">"locate my keyboard"</span>)
-robot.execute_command(<span class="highlight">"navigate to the kitchen"</span>)
-
-<span class="comment"># Record training episodes</span>
-episodes = robot.record_episodes(num_episodes=<span class="highlight">50</span>)
-
-<span class="comment"># Train your policy</span>
-policy = robot.train_policy(episodes)
-
-<span class="comment"># Run inference with trained model</span>
-robot.execute_policy(policy, task=<span class="highlight">"find and bring me my coffee mug"</span>)
-</code></pre>
-            </div>
-
-            <div style="text-align: center; margin-top: 3rem;">
-                <div class="cta-buttons">
-                    <a href="https://luckyrobots.com/" class="cta-button primary">View Documentation</a>
-                    <a href="https://huggingface.co/luckyrobots" class="cta-button secondary" target="_blank">Explore & Share Models</a>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <a href="https://luckyrobots.com/">LuckyRobots</a>
+                    <a href="https://huggingface.co/luckyrobots">HuggingFace Models</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="#tutorial">Tutorials</a>
+                    <a href="#robots">Robot Models</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <a href="https://github.com/ZoreAnuj/LuckyWorldRelease.github.io">GitHub</a>
+                    <a href="https://luckyrobots.com/">Documentation</a>
                 </div>
             </div>
-
-            <div class="investor-logos">
-                <span>ANTLER</span>
-                <span>Ascend</span>
-                <span>boostVC</span>
-                <span>DRAPER ASSOCIATES</span>
-                <span>TOMAHAWK.VC</span>
+            <div class="footer-bottom">
+                <p>&copy; 2025 LuckyRobots. All rights reserved.</p>
             </div>
         </div>
-    </section>
+    </footer>
 
     <script>
         // Particle system for dynamic background
