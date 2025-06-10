@@ -1134,11 +1134,22 @@ python lerobot\examples\0_setup_dataset_tag.py
                         </div>
                         <div class="tutorial-code-block">
 <pre><code><span class="comment"># Train your policy with diffusion model</span>
+<span class="comment"># This command will start training using the SO100 dataset</span>
+
 python lerobot/scripts/train.py \
     --dataset.repo_id=<span class="highlight">luckyrobots/so100_Dataset_250_V0.1</span> \
     --policy.type=<span class="highlight">diffusion</span> \
     --dataset.video_backend=<span class="highlight">torchcodec</span> \
     <span class="highlight">2>&1</span> | tee training_log.txt
+
+<span class="comment"># Parameters explained:</span>
+<span class="comment"># --dataset.repo_id: HuggingFace dataset repository</span>
+<span class="comment"># --policy.type: Neural network architecture (diffusion)</span>
+<span class="comment"># --dataset.video_backend: Video processing backend</span>
+<span class="comment"># 2>&1 | tee: Save training logs to training_log.txt</span>
+
+<span class="comment"># Training will save checkpoints automatically</span>
+<span class="comment"># Monitor progress in training_log.txt</span>
 </code></pre>
                         </div>
                     </div>
