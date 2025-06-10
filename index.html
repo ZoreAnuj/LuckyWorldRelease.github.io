@@ -681,6 +681,57 @@
             font-weight: 500;
         }
 
+        .tutorial-code-block {
+            background: #f0f2f5;
+            border: 1px solid #d1d3d6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            overflow-x: auto;
+            position: relative;
+            height: 250px;
+            overflow-y: auto;
+        }
+
+        .tutorial-code-block::before {
+            content: 'Shell/Python';
+            position: absolute;
+            top: 0.8rem;
+            right: 1rem;
+            background: #333;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .tutorial-code-block pre {
+            color: #333;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .tutorial-code-block code {
+            font-family: inherit;
+        }
+
+        .video-embed-container {
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+            height: 250px;
+        }
+
+        .video-embed-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 12px;
+        }
+
         .code-section {
             background: white;
             padding: 5rem 0;
@@ -858,6 +909,21 @@
                 padding: 1.5rem;
             }
 
+            .video-embed-container {
+                height: 200px;
+            }
+
+            .tutorial-code-block {
+                height: 200px;
+                padding: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .tutorial-code-block pre {
+                font-size: 0.75rem;
+                line-height: 1.3;
+            }
+
             .page-nav {
                 display: none;
             }
@@ -877,6 +943,19 @@
             .page-nav-header {
                 font-size: 0.95rem;
                 padding: 0 1.2rem 0.8rem 1.2rem;
+            }
+
+            .video-embed-container {
+                height: 220px;
+            }
+
+            .tutorial-code-block {
+                height: 220px;
+                padding: 1.2rem;
+            }
+
+            .tutorial-code-block pre {
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -899,7 +978,7 @@
         <div class="page-nav-header">In this release</div>
         <a href="#hero" class="page-nav-item active">Introducing LuckyWorld</a>
         <a href="#robots" class="page-nav-item">Featured robot models</a>
-        <a href="#so100" class="page-nav-item">SO100 navigation robot</a>
+        <a href="#so100" class="page-nav-item">Stretch mobile manipulator</a>
         <a href="#experimental" class="page-nav-item">Experimental platforms</a>
         <a href="#tutorial" class="page-nav-item">Tutorial overview</a>
         <a href="#intro" class="page-nav-item">Introduction</a>
@@ -943,13 +1022,13 @@
                 <p>Today, developers and enterprises are using our platform to build and explore robotic models capable of understanding natural language and performing practical tasks.</p>
             </div>
             
-            <!-- SO100 - Full Width -->
+            <!-- Stretch - Full Width -->
             <div class="robot-card-full" id="so100">
                 <div class="robot-gif-container">
-                    <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/so100_Demo_gif.gif" alt="SO100 Robot" style="width: 100%; height: auto; border-radius: 12px; display: block;" />
+                    <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/so100_Demo_gif.gif" alt="Stretch Robot" style="width: 100%; height: auto; border-radius: 12px; display: block;" />
                 </div>
-                <h3>SO100</h3>
-                <p>Compact wheeled robot for indoor navigation and mapping tasks.</p>
+                <h3>Stretch</h3>
+                <p>Mobile manipulator with mobility and manipulation capabilities for service robotics.</p>
             </div>
 
             <!-- Experimental Robots Grid -->
@@ -958,10 +1037,10 @@
                     <div class="experimental-badge">Experimental</div>
                     
                     <div class="robot-placeholder" style="padding: 0;">
-                        <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/dji300.gif" alt="Stretch Robot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
+                        <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/dji300.gif" alt="SO100 Robot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
                     </div>
-                    <h3>Stretch</h3>
-                    <p>Mobile manipulator with mobility and manipulation capabilities for service robotics.</p>
+                    <h3>SO100</h3>
+                    <p>Compact wheeled robot for indoor navigation and mapping tasks.</p>
                 </div>
                 <div class="robot-card">
                     <div class="experimental-badge">Experimental</div>
@@ -1020,8 +1099,28 @@
                 <div class="tutorial-item" id="upload">
                     <h4>Uploading and Setting HuggingFace Tag</h4>
                     <div class="tutorial-content-grid">
-                        <div class="tutorial-placeholder">Upload Process Video</div>
-                        <div class="tutorial-placeholder">HuggingFace Integration Steps</div>
+                        <div class="video-embed-container">
+                            <iframe src="https://drive.google.com/file/d/14cqMW5gkVPgVMCoWj5AGnaf7WNkH1Frj/preview" 
+                                    width="100%" 
+                                    height="250" 
+                                    allow="autoplay"
+                                    style="border: none; border-radius: 12px;">
+                            </iframe>
+                        </div>
+                        <div class="tutorial-code-block">
+<pre><code><span class="comment"># Install the Hugging Face CLI</span>
+pip install -U <span class="highlight">"huggingface_hub[cli]"</span>
+
+<span class="comment"># Login with your Hugging Face credentials</span>
+huggingface-cli login
+
+<span class="comment"># Push your dataset files</span>
+huggingface-cli upload zero7101/asdasdasd . --repo-type=dataset
+
+<span class="comment"># Setting Up Tag</span>
+python lerobot\examples\0_setup_dataset_tag.py
+</code></pre>
+                        </div>
                     </div>
                 </div>
                 <div class="tutorial-item" id="training">
