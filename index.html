@@ -962,7 +962,7 @@
         <div class="page-nav-header">In this release</div>
         <a href="#hero" class="page-nav-item active">Introducing LuckyWorld</a>
         <a href="#robots" class="page-nav-item">Featured robot models</a>
-        <a href="#so100" class="page-nav-item">Stretch mobile manipulator</a>
+        <a href="#so100" class="page-nav-item">SO100 robotic arm</a>
         <a href="#experimental" class="page-nav-item">Experimental platforms</a>
         <a href="#tutorial" class="page-nav-item">Tutorial overview</a>
         <a href="#intro" class="page-nav-item">Introduction</a>
@@ -1005,7 +1005,7 @@
                 <p>Today, developers and enterprises are using our platform to build and explore robotic models capable of understanding natural language and performing practical tasks.</p>
             </div>
             
-            <!-- Stretch - Full Width -->
+            <!-- SO100 - Full Width -->
             <div class="robot-card-full" id="so100">
                 <div class="robot-gif-container">
                     <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/so100_Demo_gif.gif" alt="Stretch Robot" style="width: 100%; height: auto; border-radius: 12px; display: block;" />
@@ -1020,19 +1020,19 @@
                     <div class="experimental-badge">Experimental</div>
                     
                     <div class="robot-placeholder" style="padding: 0;">
-                        <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/dji300.gif" alt="SO100 Robot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
+                        <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/dji300.gif" alt="Stretch Robot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
                     </div>
-                    <h3>SO100</h3>
-                    <p>Compact wheeled robot for indoor navigation and mapping tasks.</p>
+                    <h3>Stretch</h3>
+                    <p>Mobile manipulator robot designed for home environments. Features 6-DOF arm, mobile base, and advanced perception capabilities for indoor navigation and manipulation tasks.</p>
                 </div>
                 <div class="robot-card">
                     <div class="experimental-badge">Experimental</div>
                     
                     <div class="robot-placeholder" style="padding: 0;">
-                        <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/dji300.gif" alt="DJI300 Robot" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
+                        <img src="https://raw.githubusercontent.com/ZoreAnuj/LuckyWorldRelease.github.io/main/assests/dji300.gif" alt="DJI Matrice 300 RTK" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;" />
                     </div>
-                    <h3>DJI300</h3>
-                    <p>Aerial robot platform for navigation and environmental mapping.</p>
+                    <h3>DJI Matrice 300 RTK</h3>
+                    <p>Professional commercial drone platform with 55-minute flight time, 15km transmission range, and dual RTK antennas for precision mapping and industrial applications.</p>
                 </div>
             </div>
         </div>
@@ -1127,12 +1127,10 @@ python lerobot/scripts/train.py \
 
 <span class="comment"># Parameters explained:</span>
 <span class="comment"># --dataset.repo_id: HuggingFace dataset repository</span>
-<span class="comment"># --policy.type: Neural network architecture (diffusion)</span>
+<span class="comment"># --policy.type: Policy type (e.g. Diffusion, pi0, ACT)</span>
 <span class="comment"># --dataset.video_backend: Video processing backend</span>
 <span class="comment"># 2>&1 | tee: Save training logs to training_log.txt</span>
 
-<span class="comment"># Training will save checkpoints automatically</span>
-<span class="comment"># Monitor progress in training_log.txt</span>
 </code></pre>
                         </div>
                     </div>
