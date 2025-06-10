@@ -1100,11 +1100,10 @@
                     <h4>Uploading and Setting HuggingFace Tag</h4>
                     <div class="tutorial-content-grid">
                         <div class="video-embed-container">
-                            <iframe src="https://drive.google.com/file/d/14cqMW5gkVPgVMCoWj5AGnaf7WNkH1Frj/preview" 
-                                    width="100%" 
-                                    height="250" 
-                                    allow="autoplay"
-                                    style="border: none; border-radius: 12px;">
+                            <iframe src="https://www.youtube.com/embed/rdoIYxKmeEk" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
                             </iframe>
                         </div>
                         <div class="tutorial-code-block">
@@ -1126,8 +1125,22 @@ python lerobot\examples\0_setup_dataset_tag.py
                 <div class="tutorial-item" id="training">
                     <h4>Training Your Own Policy</h4>
                     <div class="tutorial-content-grid">
-                        <div class="tutorial-placeholder">Training Process Video</div>
-                        <div class="tutorial-placeholder">Policy Training Code</div>
+                        <div class="video-embed-container">
+                            <iframe src="https://www.youtube.com/embed/bXmPSrVMmeA" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        </div>
+                        <div class="tutorial-code-block">
+<pre><code><span class="comment"># Train your policy with diffusion model</span>
+python lerobot/scripts/train.py \
+    --dataset.repo_id=<span class="highlight">luckyrobots/so100_Dataset_250_V0.1</span> \
+    --policy.type=<span class="highlight">diffusion</span> \
+    --dataset.video_backend=<span class="highlight">torchcodec</span> \
+    <span class="highlight">2>&1</span> | tee training_log.txt
+</code></pre>
+                        </div>
                     </div>
                 </div>
                 <div class="tutorial-item" id="inference">
